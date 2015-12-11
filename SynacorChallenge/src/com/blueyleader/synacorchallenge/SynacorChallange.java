@@ -1,6 +1,7 @@
 package com.blueyleader.synacorchallenge;
 
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,9 +12,15 @@ public class SynacorChallange {
 		String fileName = "challenge.bin";
 		Path path = Paths.get(fileName);
 		byte[] bytes = Files.readAllBytes(path);
-
-		for(int x=0;x<bytes.length;x+=2){
-			switch(bytes[x]){
+		int[] data = new int[bytes.length/2];
+		
+		//combine the 2 bytes for easy use
+		for(int x=0;x<bytes.length-1;x+=2){
+			data[x/2] = ((bytes[x+1] & 0xFF) << 8) | (bytes[x] & 0xFF);
+		}
+		
+		for(int x=0;x<data.length;x++){
+			switch(data[x]){
 			case 0:
 				System.exit(0);
 				break;
@@ -72,8 +79,8 @@ public class SynacorChallange {
 				
 				break;	
 			case 19:
-				x+=2;
-				System.out.print((char)bytes[x]);
+				x++;
+				System.out.print((char)data[x]);
 				break;
 			case 20:
 					
