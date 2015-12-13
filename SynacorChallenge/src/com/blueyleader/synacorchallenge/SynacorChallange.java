@@ -29,7 +29,7 @@ public class SynacorChallange {
 		int[] data = new int[bytes.length/2];
 		int[] regs= new int[8];	
 		Scanner scan = new Scanner(System.in);
-		String input;
+		String input = "",binary;
 		char c;
 		//combine the 2 bytes for easy use
 		Stack<Integer> stack = new Stack<Integer>();
@@ -286,21 +286,21 @@ public class SynacorChallange {
 				if(reg(v2)){
 					v2=regs[v2-REGSTART];
 				}
-				input=Integer.toBinaryString(v2);
-				v3=input.length();
+				binary=Integer.toBinaryString(v2);
+				v3=binary.length();
 				for(int z=15;z>v3;z--){
-					input="0"+input;
+					binary="0"+binary;
 				}
-				for(int y=0;y<input.length();y++){
-					if(input.charAt(y)=='0'){
-						input=input.substring(0,y)+'1'+input.substring(y+1);
+				for(int y=0;y<binary.length();y++){
+					if(binary.charAt(y)=='0'){
+						binary=binary.substring(0,y)+'1'+binary.substring(y+1);
 					}
 					else{
-						input=input.substring(0,y)+'0'+input.substring(y+1);
+						binary=binary.substring(0,y)+'0'+binary.substring(y+1);
 					}	
 				}
 				
-				regs[v1]=Integer.parseInt(input,2);
+				regs[v1]=Integer.parseInt(binary,2);
 				//regs[v1]=~v2;
 				break;
 				
@@ -396,11 +396,11 @@ public class SynacorChallange {
 				
 				x++;
 				v1=data[x]-REGSTART;
-				
-				input=scan.nextLine();
-				input=input+'\n';
+				if(input.equals(""))
+					input=scan.nextLine()+'\n';
+
 				c= input.charAt(0);
-				
+				input=input.substring(1);
 				regs[v1]=c;
 				break;
 				
