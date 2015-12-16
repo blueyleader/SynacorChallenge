@@ -1,5 +1,6 @@
 package com.blueyleader.synacorchallenge;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.file.Files;
@@ -396,8 +397,36 @@ public class SynacorChallange {
 				
 				x++;
 				v1=data[x]-REGSTART;
-				if(input.equals(""))
+				if(input.equals("")){
 					input=scan.nextLine()+'\n';
+					if(input.contains("current regs\n")){
+						for(int y=0;y<regs.length;y++){
+							System.out.println(y+": "+regs[y]);
+						}
+						input="\n";
+					}
+					else if(input.contains("set regs 1\n")){
+						regs[7]=1;
+						input="\n";
+					}
+					else if(input.contains("set regs 0\n")){
+						regs[7]=0;
+						input="\n";
+					}
+					else if(input.contains("set regs 0\n")){
+						regs[7]=0;
+						input="\n";
+					}
+					else if(input.contains("Load File")){
+						Scanner fileIn = new Scanner(new File("input.txt"));
+						input="";
+						while(fileIn.hasNext()){
+							input+=fileIn.nextLine()+"\n";
+						}
+						
+					}
+					
+				}
 
 				c= input.charAt(0);
 				input=input.substring(1);
