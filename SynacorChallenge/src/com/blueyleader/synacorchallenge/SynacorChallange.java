@@ -2,7 +2,6 @@ package com.blueyleader.synacorchallenge;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -34,15 +33,16 @@ public class SynacorChallange {
 		char c;
 		//combine the 2 bytes for easy use
 		Stack<Integer> stack = new Stack<Integer>();
+		//PrintWriter writer = new PrintWriter("binary.txt");
 		for(int x=0;x<bytes.length-1;x+=2){
 			data[x/2] = ((bytes[x+1] & 0xFF) << 8) | (bytes[x] & 0xFF);
+			//writer.println(x/2+": "+data[x/2]);
 		}
+		//writer.close();
 		int v1,v2,v3;
 		boolean reg;
 		int x=0;
 		while(x<data.length){
-			//System.out.println(data[x]+" "+x);
-		//for(int x=0;x<data.length;x++){
 			if(x==1800){
 				System.out.print("");
 			}
@@ -413,17 +413,12 @@ public class SynacorChallange {
 						regs[7]=0;
 						input="\n";
 					}
-					else if(input.contains("set regs 0\n")){
-						regs[7]=0;
-						input="\n";
-					}
 					else if(input.contains("Load File")){
 						Scanner fileIn = new Scanner(new File("input.txt"));
 						input="";
 						while(fileIn.hasNext()){
 							input+=fileIn.nextLine()+"\n";
 						}
-						
 					}
 					
 				}
