@@ -43,7 +43,7 @@ public class SynacorChallange {
 		boolean reg;
 		int x=0;
 		while(x<data.length){
-			if(x==1800){
+			if(x==5451 || x==5523||x==6042){
 				System.out.print("");
 			}
 			switch(data[x]){
